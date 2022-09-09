@@ -1,0 +1,4 @@
+venv
+*.wav
+*.egg-info
+__pycache__
