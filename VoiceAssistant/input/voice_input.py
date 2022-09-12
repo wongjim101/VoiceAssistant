@@ -1,5 +1,6 @@
 import pyaudio
 import wave
+import speech_recognition as sr
 
 def record(seconds):
     CHUNK = 1024
@@ -7,8 +8,9 @@ def record(seconds):
     CHANNELS = 2
     RATE = 44100
     RECORD_SECONDS = seconds
+    PAUSE_SECONDS = 2
     WAVE_OUTPUT_FILENAME = "output.wav"
-
+    MAX_PAUSE = int(RATE / CHUNK * PAUSE_SECONDS)
     p = pyaudio.PyAudio()
 
     stream = p.open(format=FORMAT,
@@ -20,7 +22,7 @@ def record(seconds):
     print("* recording")
 
     frames = []
-
+    pause_counter = 0
     for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
         data = stream.read(CHUNK)
         frames.append(data)
@@ -37,3 +39,17 @@ def record(seconds):
     wf.setframerate(RATE)
     wf.writeframes(b''.join(frames))
     wf.close()
+
+def record_auto() -> str:
+    text = ""
+    try:
+        mic = sr.Microphone() 
+        r = sr.Recognizer()
+        with mic as source:
+            audio = r.listen(source,timeout=2)
+        text = r.recognize_google(audio)
+    except:
+        pass
+    finally:
+        print(f"Recognized text string of: {text}")
+        return text

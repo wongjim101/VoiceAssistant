@@ -1,9 +1,10 @@
 # Voice Assistant
 
 ## Capabilities: 
-- [x] Input - Receive Voice Input
-- [x] Recognition - Transcribe speech to text
-- [x] Search - Perform google search for text in default browser
+- Input - Receive Voice Input
+- Recognition - Transcribe speech to text
+- Search - Perform google search for text in default browser
+- Uses decorators to wrap common backend functions 
 
 ## Hardware requirements:
 - Internet 
@@ -16,5 +17,4 @@
 - pip install .
 
 ## Run instructions:
-- python ./VoiceAssistant/voice_assistant.py num_seconds
-    - where num_seconds is the number of seconds to be recorded 
+- python ./VoiceAssistant/voice_assistant.py
